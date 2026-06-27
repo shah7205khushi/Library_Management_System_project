@@ -5,6 +5,5 @@
 --%>
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-<a href="logout.jsp">logout</a>
 
-<h2>Registration Successful!</h2>
+<h2>Login Successful!</h2>

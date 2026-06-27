@@ -54,7 +54,7 @@
         <script>
             alert("You are already registered. Please login.");
             setTimeout(function () {
-                window.location.href = "usermanagement.jsp";
+                window.location.href = "index.jsp";
             }, 3000);
         </script>
     <% } %>
@@ -67,68 +67,49 @@
         <div class="form-group">
             <label>Registration No</label>
             <input type="text" name="regno" class="form-control" placeholder="Registration No" 
-                   value="<%= regno != null ? regno : "" %>" <%= otpSent ? "readonly" : "" %> autocomplete="off" >
+                   value="<%= regno != null ? regno : "" %>" <%= otpSent ? "readonly" : "" %> required>
         </div>
         <div class="form-group">
             <label>First Name</label>
-            <input type="text" name="fname" class="form-control" placeholder="First Name"
-       pattern="^[A-Za-z]{1,}$" title="No spaces or special characters allowed"
-       value="<%= fname != null ? fname : "" %>" <%= otpSent ? "readonly" : "" %> autocomplete="off"  required>
-
+            <input type="text" name="fname" class="form-control" placeholder="First Name" 
+                   value="<%= fname != null ? fname : "" %>" <%= otpSent ? "readonly" : "" %> required>
         </div>
         <div class="form-group">
             <label>Last Name</label>
-            <input type="text" name="lname" class="form-control" placeholder="Last Name"
-       pattern="^[A-Za-z]{1,}$" title="No spaces or special characters allowed"
-       value="<%= lname != null ? lname : "" %>" <%= otpSent ? "readonly" : "" %> autocomplete="off"  required>
-
+            <input type="text" name="lname" class="form-control" placeholder="Last Name" 
+                   value="<%= lname != null ? lname : "" %>" <%= otpSent ? "readonly" : "" %> required>
         </div>
         <div class="form-group">
             <label>Email</label>
-            <input type="email" name="email" class="form-control" placeholder="Email"
-       pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-       title="Enter a valid email address"
-        <%= otpSent ? "readonly" : "" %> autocomplete="off"  required>
+            <input type="email" name="email" class="form-control" placeholder="Email" 
+                   value="<%= email != null ? email : "" %>" <%= otpSent ? "readonly" : "" %> required>
         </div>
         <div class="form-group">
             <label>Phone Number</label>
-            <input type="tel" name="phone" class="form-control" placeholder="Phone"
-       pattern="^[0-9]{10}$" title="Phone number must be exactly 10 digits"
-       value="<%= phone != null ? phone : "" %>" <%= otpSent ? "readonly" : "" %> autocomplete="off"  required>
+            <input type="text" name="phone" class="form-control" placeholder="Phone" 
+                   value="<%= phone != null ? phone : "" %>" <%= otpSent ? "readonly" : "" %> required>
         </div>
         <div class="form-group">
             <label>Role</label>
             <select name="role" class="form-control" <%= otpSent ? "disabled" : "" %> required>
                 <option value="">Select Role</option>
-                <option value="Student" <%= "Student".equals(role) ? "selected" : "" %>>Student</option>
-                <option value="Faculty" <%= "Faculty".equals(role) ? "selected" : "" %>>Faculty</option>
+                <option value="student" <%= "student".equals(role) ? "selected" : "" %>>Student</option>
+                <option value="teacher" <%= "teacher".equals(role) ? "selected" : "" %>>Teacher</option>
             </select>
         </div>
 
         <% if (!otpSent) { %>
-<button type="submit" formaction="/library_management_system/admin/SendCustomerOTPServlet" class="btn btn-blue btn-block">Send OTP</button>
+<button type="submit" formaction="SendCustomerOTPServlet" class="btn btn-blue btn-block">Send OTP</button>
         <% } else { %>
             <div class="form-group">
                 <label>Enter OTP</label>
                 <input type="text" name="otp" class="form-control" placeholder="Enter OTP" required>
             </div>
-<button type="submit" formaction="/library_management_system/admin/VerifyCustomerOTPServlet" class="btn btn-blue btn-block">Verify OTP</button>
+<button type="submit" formaction="VerifyCustomerOTPServlet" class="btn btn-blue btn-block">Verify OTP</button>
         <% } %>
     </form>
 </div>
-   <%
-    String otpError = (String) session.getAttribute("otpError");
-    if ("true".equals(otpError)) {
-%>
-<script>
-    alert("Invalid OTP. Please try again.");
-</script>
-<%
-        session.removeAttribute("otpError"); // Clear the flag after showing
-    }
-%>
-
-
+   
 
 </body>
 </html>
